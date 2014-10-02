@@ -14,7 +14,7 @@ public interface Person {
 	 * @param n
 	 *            a ten digit number
 	 */
-	public abstract void setID(long n);
+	public abstract void setID(long ID);
 
 	/**
 	 * retrieve user ID
