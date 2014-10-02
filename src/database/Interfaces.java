@@ -69,10 +69,22 @@ public class Interfaces {
 
 	/**
 	 * report the event result to database
-	 * @param e an Event Object contains event information
-	 * @param s the result of event
+	 * 
+	 * @param e
+	 *            an Event Object contains event information
+	 * @param s
+	 *            the result of event
 	 */
 	public static void report(Event e, boolean r) {
+	}
+
+	/**
+	 * generate a new database
+	 * 
+	 * @return true if successful, false otherwise
+	 */
+	public static boolean createDatabase() {
+		return false;
 	}
 
 }
