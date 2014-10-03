@@ -8,6 +8,7 @@ public class Interfaces {
 	 * create an new windows
 	 */
 	public static void startup() {
+		// TODO
 	}
 
 	/**
@@ -17,5 +18,6 @@ public class Interfaces {
 	 *            a list contains all person status
 	 */
 	public static void drawUsers(Iterable<PersonStatus> list) {
+		// TODO
 	}
 }
