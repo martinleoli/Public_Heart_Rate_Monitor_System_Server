@@ -20,6 +20,14 @@ public class IOService implements Runnable {
 	// private database.MyIMDB db;
 	boolean run = true;
 
+	/**
+	 * default constructor
+	 * 
+	 * @param s
+	 *            input socket
+	 * @param s1
+	 *            output socket
+	 */
 	public IOService(Socket s, Socket s1/* ,database.MyIMDB db */) {
 		socket = s;
 		socket1 = s1;
