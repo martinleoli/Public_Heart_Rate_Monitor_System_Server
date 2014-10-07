@@ -62,4 +62,9 @@ public class Location implements Coordinate {
 		return this.latitude;
 	}
 
+	@Override
+	public String toString() {
+		return "[" + this.longtitude + "," + this.latitude + "]";
+	}
+
 }
