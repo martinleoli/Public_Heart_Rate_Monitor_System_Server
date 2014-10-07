@@ -1,4 +1,4 @@
-package test.cleint;
+package test.client;
 
 public class Main {
 
