@@ -10,6 +10,10 @@ import database.interfaces.Person;
  */
 public class UserInfo implements Person {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final long ID;
 	private String firstName = "";
 	private String lastName = "";

@@ -12,6 +12,10 @@ import database.interfaces.PersonStatus;
  */
 public class UserStatus implements PersonStatus {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Person user;
 	private Coordinate location;
 	private int heartRate;

@@ -10,6 +10,10 @@ import database.interfaces.Coordinate;
  */
 public class Location implements Coordinate {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private double longtitude;
 	private double latitude;
 
