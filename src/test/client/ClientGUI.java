@@ -24,7 +24,7 @@ import database.interfaces.PersonStatus;
  * @author bing
  *
  */
-public class ClientGUI extends JFrame{
+public class ClientGUI extends JFrame {
 
 	/**
 	 * 
@@ -47,11 +47,20 @@ public class ClientGUI extends JFrame{
 
 	JScrollPane logPane;
 
+	/**
+	 * this is the test constructor
+	 */
 	public ClientGUI() {
 		this(new UserStatus(new UserInfo(2222, "Long", "Ma"), new Location(222,
 				222), 222));
 	}
 
+	/**
+	 * this is the default constructor
+	 * 
+	 * @param us
+	 *            an PersonStatus object contains default user information
+	 */
 	public ClientGUI(PersonStatus us) {
 		// set information
 
@@ -60,6 +69,11 @@ public class ClientGUI extends JFrame{
 		// initialize components
 		JButton setButton = new JButton("Set");
 		JButton connectButton = new JButton("Connect");
+
+		setButton.addActionListener(new ButtonListener(this,
+				ButtonListener.Set_button));
+		connectButton.addActionListener(new ButtonListener(this,
+				ButtonListener.Connect_Button));
 
 		log = new JTextArea();
 		userID = new JTextField(us.getPerson().getID() + "");
@@ -157,6 +171,11 @@ public class ClientGUI extends JFrame{
 
 	}
 
+	/**
+	 * get user status from this client
+	 * 
+	 * @return an PersonStatus Object contains user status
+	 */
 	private PersonStatus getStatus() {
 		return new UserStatus(new UserInfo(
 				Long.parseLong(this.userID.getText()),
@@ -167,9 +186,18 @@ public class ClientGUI extends JFrame{
 
 	}
 
+	private void print(String s) {
+	}
+
+	public void connect() {
+	}
+
+	public void set() {
+	}
+
 	public static void main(String args[]) {
 		ClientGUI c = new ClientGUI();
-		UserStatus us = (UserStatus)c.getStatus();
+		UserStatus us = (UserStatus) c.getStatus();
 		System.out.println(us);
 
 	}
