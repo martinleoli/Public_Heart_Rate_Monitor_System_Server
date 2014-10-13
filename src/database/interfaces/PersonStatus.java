@@ -38,7 +38,7 @@ public interface PersonStatus extends Serializable{
 	 * @param h
 	 *            an Integer number present heart rate number
 	 */
-	public abstract void serHearRate(int h);
+	public abstract void setHearRate(int h);
 
 	/**
 	 * set coordinate
