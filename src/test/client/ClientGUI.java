@@ -24,7 +24,7 @@ import database.interfaces.PersonStatus;
  * @author bing
  *
  */
-public class ClientGUI extends JFrame {
+public class ClientGUI extends JFrame{
 
 	/**
 	 * 
@@ -35,7 +35,17 @@ public class ClientGUI extends JFrame {
 	private int window_height = 500;
 	private int window_width = 500;
 
-	private PersonStatus userStatus;
+	private JTextArea log;
+	private JTextField userID;
+	private JTextField userFirstName;
+	private JTextField userLastName;
+	private JTextField longtitude;
+	private JTextField latitude;
+	private JTextField heartRate;
+	private JTextField IP;
+	private JTextField port;
+
+	JScrollPane logPane;
 
 	public ClientGUI() {
 		this(new UserStatus(new UserInfo(2222, "Long", "Ma"), new Location(222,
@@ -44,28 +54,27 @@ public class ClientGUI extends JFrame {
 
 	public ClientGUI(PersonStatus us) {
 		// set information
-		this.userStatus = us;
-		this.setTitle("Test Client: ID: " + this.userStatus.getPerson().getID());
+
+		this.setTitle("Test Client: ID: " + us.getPerson().getID());
 
 		// initialize components
 		JButton setButton = new JButton("Set");
 		JButton connectButton = new JButton("Connect");
-		JTextArea log = new JTextArea();
-		JTextField userID = new JTextField(us.getPerson().getID() + "");
-		JTextField userFirstName = new JTextField(us.getPerson().getFirstName());
-		JTextField userLastName = new JTextField(us.getPerson().getLastName());
-		JTextField longtitude = new JTextField(us.getCoordinate()
-				.getLongitude() + "");
-		JTextField latitude = new JTextField(us.getCoordinate().getLatitude()
-				+ "");
-		JTextField heartRate = new JTextField(us.getHeartRate()+"");
-		JTextField IP = new JTextField("localhost");
-		JTextField port = new JTextField(ServerInfo.server_port_number+"");
-		
-		JScrollPane logPane = new JScrollPane(log,
+
+		log = new JTextArea();
+		userID = new JTextField(us.getPerson().getID() + "");
+		userFirstName = new JTextField(us.getPerson().getFirstName());
+		userLastName = new JTextField(us.getPerson().getLastName());
+		longtitude = new JTextField(us.getCoordinate().getLongitude() + "");
+		latitude = new JTextField(us.getCoordinate().getLatitude() + "");
+		heartRate = new JTextField(us.getHeartRate() + "");
+		IP = new JTextField("localhost");
+		port = new JTextField(ServerInfo.server_port_number + "");
+
+		logPane = new JScrollPane(log,
 				ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		
+
 		JLabel label1 = new JLabel("User Information");
 		JLabel label2 = new JLabel("User ID:");
 		JLabel label3 = new JLabel("First Name:");
@@ -89,7 +98,7 @@ public class ClientGUI extends JFrame {
 		label8.setBounds(10, 135, 90, 20);
 		label9.setBounds(10, 160, 480, 10);
 		label10.setBounds(10, 185, 100, 20);
-		label11.setBounds(10,210,100,20);
+		label11.setBounds(10, 210, 100, 20);
 
 		userID.setBounds(80, 35, 200, 20);
 		userFirstName.setBounds(100, 60, 100, 20);
@@ -102,9 +111,8 @@ public class ClientGUI extends JFrame {
 
 		setButton.setBounds(350, 135, 100, 20);
 		connectButton.setBounds(300, 210, 150, 20);
-		
-		logPane.setBounds(10, 235, 480, 250);
-		
+
+		logPane.setBounds(10, 235, 475, 230);
 
 		log.setEditable(false);
 
@@ -145,11 +153,24 @@ public class ClientGUI extends JFrame {
 		this.setResizable(false);
 
 		this.setVisible(true);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+	}
+
+	private PersonStatus getStatus() {
+		return new UserStatus(new UserInfo(
+				Long.parseLong(this.userID.getText()),
+				this.userFirstName.getText(), this.userLastName.getText()),
+				new Location(Double.parseDouble(this.longtitude.getText()),
+						Double.parseDouble(this.latitude.getText())),
+				Integer.parseInt(this.heartRate.getText()));
 
 	}
 
 	public static void main(String args[]) {
-		new ClientGUI();
+		ClientGUI c = new ClientGUI();
+		UserStatus us = (UserStatus)c.getStatus();
+		System.out.println(us);
 
 	}
 
