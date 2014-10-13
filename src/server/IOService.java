@@ -2,7 +2,6 @@ package server;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import database.interfaces.PersonStatus;
@@ -59,6 +58,9 @@ public class IOService implements Runnable {
 
 	}
 
+	/**
+	 * handle IO service
+	 */
 	private void handle() {
 		boolean connected = true;
 		PersonStatus ps;
@@ -67,8 +69,9 @@ public class IOService implements Runnable {
 			try {
 				ps = (PersonStatus) in.readObject();
 				System.out.println("Recieved:\n" + ps.toString());
-
-				socket.close();
+				
+			//--------------------------add handle method for ps here -------------------
+				connected = false;
 
 			} catch (ClassNotFoundException | IOException e) {
 				// TODO Auto-generated catch block
