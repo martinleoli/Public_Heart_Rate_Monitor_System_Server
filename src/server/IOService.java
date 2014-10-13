@@ -17,6 +17,7 @@ public class IOService implements Runnable {
 
 	private Socket socket;
 	private ObjectInputStream in;
+	private Main m;
 	// private ObjectOutputStream out;
 
 	boolean run = true;
@@ -29,15 +30,16 @@ public class IOService implements Runnable {
 	 * @param s1
 	 *            output socket
 	 */
-	public IOService(Socket s) {
+	public IOService(Main m, Socket s) {
 		socket = s;
+		this.m = m;
 
 	}
 
 	@Override
 	public void run() {
 
-		System.out.println("something");
+		//System.out.println("something");
 
 		try {
 
@@ -68,9 +70,11 @@ public class IOService implements Runnable {
 
 			try {
 				ps = (PersonStatus) in.readObject();
-				System.out.println("Recieved:\n" + ps.toString());
-				
-			//--------------------------add handle method for ps here -------------------
+				//System.out.println("Recieved:\n" + ps.toString());
+
+				// --------------------------add handle method for ps here
+				m.addUserStatus(ps);
+				// -------------------
 				connected = false;
 
 			} catch (ClassNotFoundException | IOException e) {
