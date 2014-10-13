@@ -5,6 +5,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
+import database.interfaces.PersonStatus;
+
 /**
  * This is the agent to communicate with users
  * 
@@ -14,10 +16,10 @@ import java.net.Socket;
 
 public class IOService implements Runnable {
 
-	private Socket socket, socket1;
+	private Socket socket;
 	private ObjectInputStream in;
-	private ObjectOutputStream out;
-	// private database.MyIMDB db;
+	// private ObjectOutputStream out;
+
 	boolean run = true;
 
 	/**
@@ -28,22 +30,21 @@ public class IOService implements Runnable {
 	 * @param s1
 	 *            output socket
 	 */
-	public IOService(Socket s, Socket s1/* ,database.MyIMDB db */) {
+	public IOService(Socket s) {
 		socket = s;
-		socket1 = s1;
-		// this.db = db;
+
 	}
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
+
 		System.out.println("something");
 
 		try {
-			// System.out.println("something2");
+
 			try {
-				out = new ObjectOutputStream(socket.getOutputStream());
-				// System.out.println("something1");
+				// out = new ObjectOutputStream(socket.getOutputStream());
+
 				in = new ObjectInputStream(socket.getInputStream());
 
 				handle();// handle message
@@ -59,6 +60,32 @@ public class IOService implements Runnable {
 	}
 
 	private void handle() {
+		boolean connected = true;
+		PersonStatus ps;
+		while (connected) {
+
+			try {
+				ps = (PersonStatus) in.readObject();
+				System.out.println("Recieved:\n" + ps.toString());
+
+				socket.close();
+
+			} catch (ClassNotFoundException | IOException e) {
+				// TODO Auto-generated catch block
+				connected = false;
+
+				try {
+					socket.close();
+
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+				e.printStackTrace();
+			}
+
+		}
 	}
 
 }
