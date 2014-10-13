@@ -4,6 +4,10 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,6 +16,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
+
 import server.ServerInfo;
 import database.data.Location;
 import database.data.UserInfo;
@@ -31,7 +36,6 @@ public class ClientGUI extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private boolean connectStatus = false;
 	private int window_height = 500;
 	private int window_width = 500;
 
@@ -45,7 +49,12 @@ public class ClientGUI extends JFrame {
 	private JTextField IP;
 	private JTextField port;
 
-	JScrollPane logPane;
+	private JButton connectButton;
+
+	private JScrollPane logPane;
+
+	private Socket socket;
+	private ObjectOutputStream output;
 
 	/**
 	 * this is the test constructor
@@ -67,11 +76,9 @@ public class ClientGUI extends JFrame {
 		this.setTitle("Test Client: ID: " + us.getPerson().getID());
 
 		// initialize components
-		JButton setButton = new JButton("Set");
-		JButton connectButton = new JButton("Connect");
 
-		setButton.addActionListener(new ButtonListener(this,
-				ButtonListener.Set_button));
+		connectButton = new JButton("Send");
+
 		connectButton.addActionListener(new ButtonListener(this,
 				ButtonListener.Connect_Button));
 
@@ -123,7 +130,6 @@ public class ClientGUI extends JFrame {
 		IP.setBounds(120, 185, 300, 20);
 		port.setBounds(120, 210, 100, 20);
 
-		setButton.setBounds(350, 135, 100, 20);
 		connectButton.setBounds(300, 210, 150, 20);
 
 		logPane.setBounds(10, 235, 475, 230);
@@ -147,7 +153,7 @@ public class ClientGUI extends JFrame {
 		window.add(latitude);
 		window.add(label8);
 		window.add(heartRate);
-		window.add(setButton);
+
 		window.add(label9);
 		window.add(label10);
 		window.add(IP);
@@ -187,18 +193,59 @@ public class ClientGUI extends JFrame {
 	}
 
 	private void print(String s) {
+		String text = this.log.getText();
+		text += s + "\n";
+		this.log.setText(text);
 	}
 
+	/**
+	 * set up connection or disconnect
+	 */
 	public void connect() {
-	}
 
-	public void set() {
+		try {
+			this.print("Connecting to " + this.IP.getText() + ":"
+					+ this.port.getText());
+			socket = new Socket(this.IP.getText(), Integer.parseInt(this.port
+					.getText()));
+			output = new ObjectOutputStream(socket.getOutputStream());
+			this.print("Connect Successed!");
+			this.print("Sending User Status to Server!");
+
+			output.writeObject(this.getStatus());
+			this.print("Send Successed!");
+			this.print("Disconnecting!");
+			output.close();
+			socket.close();
+
+			this.print("Disconnect Successed!");
+
+		} catch (NumberFormatException | IOException e) {
+			// TODO Auto-generated catch block
+			this.print("Connect Fail!\n" + e.getMessage());
+
+			e.printStackTrace();
+			try {
+				this.output.close();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				this.socket.close();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		this.print("\n");
+
 	}
 
 	public static void main(String args[]) {
 		ClientGUI c = new ClientGUI();
 		UserStatus us = (UserStatus) c.getStatus();
-		System.out.println(us);
+		// System.out.println(us);
 
 	}
 

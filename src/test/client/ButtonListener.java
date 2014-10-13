@@ -36,7 +36,7 @@ public class ButtonListener implements ActionListener {
 			this.client.connect();
 			break;
 		case 1:
-			this.client.set();
+
 			break;
 
 		}
