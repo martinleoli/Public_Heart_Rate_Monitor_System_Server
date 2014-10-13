@@ -1,5 +1,7 @@
 package database.interfaces;
 
+import java.io.Serializable;
+
 /**
  * This object contain coordinate information
  * 
@@ -7,7 +9,7 @@ package database.interfaces;
  *
  */
 
-public interface Coordinate {
+public interface Coordinate extends Serializable{
 
 	/**
 	 * set longitude

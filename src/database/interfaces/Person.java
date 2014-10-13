@@ -1,12 +1,14 @@
 package database.interfaces;
 
+import java.io.Serializable;
+
 
 /**
  * this interface contains all basic user information
  * @author Bing Li
  *
  */
-public interface Person {
+public interface Person extends Serializable {
 
 	/**
 	 * set user ID
