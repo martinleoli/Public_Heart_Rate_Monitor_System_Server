@@ -58,7 +58,7 @@ public class UserStatus implements PersonStatus {
 	}
 
 	@Override
-	public void setHearRate(int h) {
+	public void serHearRate(int h) {
 		// TODO Auto-generated method stub
 
 		this.heartRate = h;
