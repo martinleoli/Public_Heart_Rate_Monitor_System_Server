@@ -9,7 +9,11 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 /**
@@ -24,6 +28,7 @@ public class DatabaseIO {
 	private Document document;
 	private FileInputStream file;
 	private String filepath;
+	private Element rootElement;
 
 	/**
 	 * test constructor create test.xml
@@ -49,7 +54,10 @@ public class DatabaseIO {
 
 		this.loadDocument();// Parse xml file
 
+		this.rootElement = this.document.getDocumentElement();
+
 	}
+
 	/**
 	 * load XML parser and parse XML file
 	 */
@@ -110,15 +118,46 @@ public class DatabaseIO {
 		}
 	}
 
+	/**
+	 * retrieve the new userID
+	 * 
+	 * @return a long integer number represent the user ID
+	 */
+	private long getUserID() {
+		NodeList nodes = this.rootElement.getElementsByTagName("data");
+		Node node = nodes.item(0);
+		nodes = ((Element) node).getElementsByTagName("userID");
+		node = nodes.item(0);
+		return Long.parseLong(node.getTextContent());
+	}
+
 	public void test() {
-		this.loadXMLFile("test.xml");
+
+		System.out.println(this.getUserID());
+		// this.loadXMLFile("test.xml");
+
+		// System.out.println(this.rootElement.getNodeName());
+		/*
+		 * NodeList nodes = this.rootElement.getElementsByTagName("data"); Node
+		 * node = nodes.item(0); nodes =
+		 * ((Element)node).getElementsByTagName("userID"); node = nodes.item(0);
+		 * System.out.println(node.getTextContent());
+		 * 
+		 * /* NodeList nodes = this.rootElement.getChildNodes();
+		 * 
+		 * for(int i=0; i<nodes.getLength(); i++){ Node node = nodes.item(i);
+		 * 
+		 * if(node instanceof Element){ //a child element to process Element
+		 * child = (Element) node; System.out.println(child.getNodeName()); } }
+		 * 
+		 * System.out.println();
+		 */
 	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		DatabaseIO database = new DatabaseIO(
-				"test.xml");
-		// database.test();
+		DatabaseIO database = new DatabaseIO("test.xml");
+		database.test();
 	}
 
 }
