@@ -130,10 +130,23 @@ public class DatabaseIO {
 		node = nodes.item(0);
 		return Long.parseLong(node.getTextContent());
 	}
+	
+	/**
+	 * retrieve the new eventID
+	 * 
+	 * @return a long integer number represent the event ID
+	 */
+	private long getEventID() {
+		NodeList nodes = this.rootElement.getElementsByTagName("data");
+		Node node = nodes.item(0);
+		nodes = ((Element) node).getElementsByTagName("eventID");
+		node = nodes.item(0);
+		return Long.parseLong(node.getTextContent());
+	}
 
 	public void test() {
 
-		System.out.println(this.getUserID());
+		System.out.println(this.getEventID());
 		// this.loadXMLFile("test.xml");
 
 		// System.out.println(this.rootElement.getNodeName());
