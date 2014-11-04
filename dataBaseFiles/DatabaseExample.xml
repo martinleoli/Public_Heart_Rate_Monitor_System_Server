@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<users>
+	<user>
+		<id>1000000000</id>
+		<firstname>Long</firstname>
+		<lastname>Ma</lastname>
+	</user>
+</users>
+<events>
+	<event>
+		<id>1000000000</id>
+		
+	</event>
+</events>
