@@ -1,14 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<data>
+	<userID>1000000003</userID>
+	<eventID>1000000002</eventID>
+</data>
 <users>
 	<user>
 		<id>1000000000</id>
 		<firstname>Long</firstname>
 		<lastname>Ma</lastname>
 	</user>
+	<user>
+		<id>1000000001</id>
+		<firstname>Bing</firstname>
+		<lastname>Li</lastname>
+	</user>
+	<user>
+		<id>1000000002</id>
+		<firstname>Zhuojun</firstname>
+		<lastname>Duan</lastname>
+	</user>
 </users>
 <events>
 	<event>
 		<id>1000000000</id>
-		
+		<userlist>
+			<userID>1000000000</userID>
+			<userID>1000000001</userID>
+		</userlist>
+		<status>true</status>
+	</event>
+	<event>
+		<id>1000000001</id>
+		<userlist>
+			<userID>1000000001</userID>
+			<userID>1000000002</userID>
+		</userlist>
+		<status>false</status>
 	</event>
 </events>
