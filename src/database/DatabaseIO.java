@@ -123,7 +123,7 @@ public class DatabaseIO {
 	 * 
 	 * @return a long integer number represent the user ID
 	 */
-	private long getUserID() {
+	public long getUserID() {
 		NodeList nodes = this.rootElement.getElementsByTagName("data");
 		Node node = nodes.item(0);
 		nodes = ((Element) node).getElementsByTagName("userID");
@@ -136,7 +136,7 @@ public class DatabaseIO {
 	 * 
 	 * @return a long integer number represent the event ID
 	 */
-	private long getEventID() {
+	public long getEventID() {
 		NodeList nodes = this.rootElement.getElementsByTagName("data");
 		Node node = nodes.item(0);
 		nodes = ((Element) node).getElementsByTagName("eventID");
