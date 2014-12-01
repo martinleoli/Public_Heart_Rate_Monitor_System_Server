@@ -1,6 +1,8 @@
 package server;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -50,17 +52,31 @@ public class Main {
 			}
 		}
 		usl.add(ps);
-		//-------------------test-----------------------------
+		// -------------------test-----------------------------
 		System.out.println("--------------------------");
 		for (PersonStatus p : this.usl) {
 			System.out.println(p.toString());
 		}
 	}
+
 	/**
 	 * output user status to data.txt for Map display
 	 */
-	public void outputDataFile(){
-		
+	public void outputDataFile() {
+		try {
+			PrintWriter pw = new PrintWriter("Maps/Data.txt");
+			// pw.println("Hello!");
+			for (PersonStatus p : this.usl) {
+				pw.println(""+p.getCoordinate().getLongitude()
+						+" "+p.getCoordinate().getLatitude()
+						+" "+p.getHeartRate());
+			}
+
+			pw.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public static void main(String[] args) {
