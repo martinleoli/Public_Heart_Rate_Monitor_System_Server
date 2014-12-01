@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Complex icons</title>
+    <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script>
+// The following example creates complex markers to indicate beaches near
+// Sydney, NSW, Australia. Note that the anchor is set to
+// (0,32) to correspond to the base of the flagpole.
+
+function initialize() {
+  var mapOptions = {
+    zoom: 12,
+    //center: new google.maps.LatLng(-33.9, 151.2)
+	
+	center: new google.maps.LatLng(33.755, -84.39)
+  }
+  var map = new google.maps.Map(document.getElementById('map-canvas'),
+                                mapOptions);
+  var beaches = [], item = [];
+  var rawFile = new XMLHttpRequest();
+  rawFile.open("GET", "points.txt", false);
+  rawFile.onreadystatechange = function (){
+    if(rawFile.readyState === 4){
+      if(rawFile.status === 200 || rawFile.status == 0){
+        var allText = rawFile.responseText;
+		var lines = allText.split("\n");
+		for(var i = 0; i < lines.length; i++){
+		  var trimmedLine = lines[i].replace(/[\s]+/g, '');
+		  var line = trimmedLine.split(",");
+		  item = [];
+		  //item.push(line[0].substring(1, line[0].length - 1));
+		  item.push(parseFloat(line[0]));
+		  item.push(parseFloat(line[1]));
+		  item.push(parseInt(line[2]));
+		  beaches.push(item);
+		  //console.log(item);
+		}   	
+      }
+    }
+  }
+  rawFile.send(null);
+  
+  setMarkers(map, beaches);
+}
+
+/**
+ * Data for the markers consisting of a name, a LatLng and a zIndex for
+ * the order in which these markers should display on top of each
+ * other.
+ */
+
+function setMarkers(map, locations) {
+  // Add markers to the map
+
+  // Marker sizes are expressed as a Size of X,Y
+  // where the origin of the image (0,0) is located
+  // in the top left of the image.
+
+  // Origins, anchor positions and coordinates of the marker
+  // increase in the X direction to the right and in
+  // the Y direction down.
+  var image1 = {
+    url: 'ima1.png',
+    // This marker is 20 pixels wide by 32 pixels tall.
+    size: new google.maps.Size(20, 20),
+    // The origin for this image is 0,0.
+    origin: new google.maps.Point(0,0),
+    // The anchor for this image is the base of the flagpole at 0,32.
+    anchor: new google.maps.Point(0, 32)
+  };
+   var image2 = {
+    url: 'ima2.png',
+    // This marker is 20 pixels wide by 32 pixels tall.
+    size: new google.maps.Size(20, 20),
+    // The origin for this image is 0,0.
+    origin: new google.maps.Point(0,0),
+    // The anchor for this image is the base of the flagpole at 0,32.
+    anchor: new google.maps.Point(0, 32)
+  };
+    var image3 = {
+    url: 'ima3.png',
+    // This marker is 20 pixels wide by 32 pixels tall.
+    size: new google.maps.Size(20, 20),
+    // The origin for this image is 0,0.
+    origin: new google.maps.Point(0,0),
+    // The anchor for this image is the base of the flagpole at 0,32.
+    anchor: new google.maps.Point(0, 32)
+  };
+  // Shapes define the clickable region of the icon.
+  // The type defines an HTML &lt;area&gt; element 'poly' which
+  // traces out a polygon as a series of X,Y points. The final
+  // coordinate closes the poly by connecting to the first
+  // coordinate.
+  var shape = {
+      coords: [1, 1, 1, 20, 18, 20, 18 , 1],
+      type: 'poly'
+  };
+	
+  for (var i = 0; i < locations.length; i++) {
+    var beach = locations[i];
+    var myLatLng = new google.maps.LatLng(beach[0], beach[1]);
+	if(beach[2]>120){
+	console.log("111111111111111111111");
+	 var marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+        icon: image3,
+        shape: shape,
+        //title: beach[0],
+        //zIndex: beach[3]
+    });
+	}
+	else if(beach[2]>90){
+	console.log("222222222222222222222");
+	 var marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+        icon: image2,
+        shape: shape,
+        //title: beach[0],
+        //zIndex: beach[3]
+    });
+	}
+	
+	else if(beach[2]>0){
+	console.log("333333333333333333333");
+	 var marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+        icon: image1,
+        shape: shape,
+        //title: beach[0],
+        //zIndex: beach[3]
+    });
+	}
+   
+  }
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+  </head>
+  <body>
+    <div id="map-canvas"></div>
+  </body>
+</html>
