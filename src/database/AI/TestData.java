@@ -12,25 +12,19 @@ import java.util.StringTokenizer;
 public class TestData {
 
 	// Reading test data
-	public ArrayList<String> readTestData() throws IOException {
+	public ArrayList<String> readTestData(int zone, int num) throws IOException {
 		ArrayList<String> candAttr = new ArrayList<String>();
-		BufferedReader reader = new BufferedReader(new InputStreamReader(
-				System.in));
-		String str = "";
-		while (!(str = reader.readLine()).equals("")) {
-			StringTokenizer tokenizer = new StringTokenizer(str);
-			while (tokenizer.hasMoreTokens()) {
-				candAttr.add(tokenizer.nextToken());
-			}
-		}
+
+		candAttr.add("" + zone);
+		candAttr.add("" + num);
+
 		return candAttr;
 	}
 
 	// Reading data from text ile
 	public ArrayList<ArrayList<String>> readData() throws IOException {
 		ArrayList<ArrayList<String>> datas = new ArrayList<ArrayList<String>>();
-		InputStream in = new FileInputStream(new File(
-				"TrainingData/data.txt"));
+		InputStream in = new FileInputStream(new File("TrainingData/data.txt"));
 		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 		String str = "";
 		while ((str = reader.readLine()) != null) {
@@ -43,25 +37,16 @@ public class TestData {
 		}
 		return datas;
 	}
-
-	public static void main(String[] args) {
-		TestData tb = new TestData();
-		ArrayList<ArrayList<String>> datas = null;
-		ArrayList<String> testT = null;
-		// ArrayList<String> testT = new ArrayList<String>();
-		NaiveTest bayes = new NaiveTest();
-		try {
-			System.out.println("Training Data.......");
-			datas = tb.readData();
-			while (true) {
-				System.out.println("Enter the Test Data");
-				testT = tb.readTestData();
-				String c = bayes.predictClass(datas, testT);
-				System.out.println("The class is: " + c);
-
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+	/*
+	 * public static void main(String[] args) { TestData tb = new TestData();
+	 * ArrayList<ArrayList<String>> datas = null; ArrayList<String> testT =
+	 * null; // ArrayList<String> testT = new ArrayList<String>(); NaiveTest
+	 * bayes = new NaiveTest(); try {
+	 * System.out.println("Training Data......."); datas = tb.readData(); while
+	 * (true) { System.out.println("Enter the Test Data"); testT =
+	 * tb.readTestData(); String c = bayes.predictClass(datas, testT);
+	 * System.out.println("The class is: " + c);
+	 * 
+	 * } } catch (IOException e) { e.printStackTrace(); } }
+	 */
 }
