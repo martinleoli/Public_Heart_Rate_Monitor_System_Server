@@ -19,6 +19,7 @@ public class Main {
 
 	private ServerSocket ssocket;
 	private UserStatusList usl;
+	private final double HIGH_SPEED = 100.0;
 
 	public Main() {
 		new ServerWindow(this);
@@ -44,6 +45,12 @@ public class Main {
 
 	}
 
+	/**
+	 * add or update new status into database
+	 * 
+	 * @param ps
+	 *            user status
+	 */
 	public void addUserStatus(PersonStatus ps) {
 		for (PersonStatus p : this.usl) {
 			if (p.getPerson().getID() == ps.getPerson().getID()) {
@@ -57,6 +64,8 @@ public class Main {
 		for (PersonStatus p : this.usl) {
 			System.out.println(p.toString());
 		}
+
+		this.checkStatus();
 	}
 
 	/**
@@ -67,15 +76,34 @@ public class Main {
 			PrintWriter pw = new PrintWriter("Maps/Data.txt");
 			// pw.println("Hello!");
 			for (PersonStatus p : this.usl) {
-				pw.println(""+p.getCoordinate().getLongitude()
-						+", "+p.getCoordinate().getLatitude()
-						+", "+p.getHeartRate());
+				pw.println("" + p.getCoordinate().getLongitude() + ", "
+						+ p.getCoordinate().getLatitude() + ", "
+						+ p.getHeartRate());
 			}
 
 			pw.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * check users status and report to AI
+	 */
+	public void checkStatus() {
+
+		int num = 0;
+		for (PersonStatus p : this.usl) {
+			if (p.getPerson().getID() == p.getPerson().getID()) {
+				if (p.getHeartRate() > this.HIGH_SPEED)
+					num++;
+			}
+		}
+		System.out.println(database.AI.Interfaces.predict(0, num));
+		
+		if (database.AI.Interfaces.predict(0, num)) {
+			new WarningWindows("Critical Event Detected in Area " + 0);
 		}
 	}
 

@@ -50,7 +50,7 @@ public class WarningWindows extends JFrame {
 
 		});
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		frame.setSize(200, 100);
+		frame.setSize(500, 100);
 		frame.setVisible(true);
 		frame.setLocation(500, 500);
 
