@@ -9,6 +9,7 @@ public class Interfaces {
 	 */
 	public static void startup() {
 		// TODO
+		new Main();
 	}
 
 	/**

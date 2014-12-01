@@ -68,8 +68,8 @@ public class Main {
 			// pw.println("Hello!");
 			for (PersonStatus p : this.usl) {
 				pw.println(""+p.getCoordinate().getLongitude()
-						+" "+p.getCoordinate().getLatitude()
-						+" "+p.getHeartRate());
+						+", "+p.getCoordinate().getLatitude()
+						+", "+p.getHeartRate());
 			}
 
 			pw.close();

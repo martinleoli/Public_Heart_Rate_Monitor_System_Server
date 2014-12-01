@@ -28,7 +28,7 @@ function initialize() {
                                 mapOptions);
   var beaches = [], item = [];
   var rawFile = new XMLHttpRequest();
-  rawFile.open("GET", "points.txt", false);
+  rawFile.open("GET", "Data.txt", false);
   rawFile.onreadystatechange = function (){
     if(rawFile.readyState === 4){
       if(rawFile.status === 200 || rawFile.status == 0){
