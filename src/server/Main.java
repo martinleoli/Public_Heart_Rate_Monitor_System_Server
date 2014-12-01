@@ -19,7 +19,7 @@ public class Main {
 	private UserStatusList usl;
 
 	public Main() {
-		new ServerWindow();
+		new ServerWindow(this);
 		usl = new UserStatusList();
 
 		try {
@@ -55,6 +55,12 @@ public class Main {
 		for (PersonStatus p : this.usl) {
 			System.out.println(p.toString());
 		}
+	}
+	/**
+	 * output user status to data.txt for Map display
+	 */
+	public void outputDataFile(){
+		
 	}
 
 	public static void main(String[] args) {
