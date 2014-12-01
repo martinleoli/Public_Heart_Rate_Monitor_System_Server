@@ -76,8 +76,8 @@ public class Main {
 			PrintWriter pw = new PrintWriter("Maps/Data.txt");
 			// pw.println("Hello!");
 			for (PersonStatus p : this.usl) {
-				pw.println("" + p.getCoordinate().getLongitude() + ", "
-						+ p.getCoordinate().getLatitude() + ", "
+				pw.println("" + p.getCoordinate().getLatitude() + ", "
+						+ p.getCoordinate().getLongitude() + ", "
 						+ p.getHeartRate());
 			}
 

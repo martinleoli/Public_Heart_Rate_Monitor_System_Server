@@ -60,8 +60,8 @@ public class ClientGUI extends JFrame {
 	 * this is the test constructor
 	 */
 	public ClientGUI() {
-		this(new UserStatus(new UserInfo(2222, "Long", "Ma"), new Location(222,
-				222), 222));
+		this(new UserStatus(new UserInfo(2222, "Long", "Ma"), new Location(-84.392234,33.754507
+				), 222));
 	}
 
 	/**
@@ -101,8 +101,8 @@ public class ClientGUI extends JFrame {
 		JLabel label3 = new JLabel("First Name:");
 		JLabel label4 = new JLabel("Last Name:");
 		JLabel label5 = new JLabel("Coordinate");
-		JLabel label6 = new JLabel("Longtitude:");
-		JLabel label7 = new JLabel("Latitude:");
+		JLabel label6 = new JLabel("Latitude:");
+		JLabel label7 = new JLabel("Longtitude:");
 		JLabel label8 = new JLabel("Heart Rate:");
 		JLabel label9 = new JLabel(
 				"----------------------------------------------------------------------------------------------");
@@ -124,8 +124,8 @@ public class ClientGUI extends JFrame {
 		userID.setBounds(80, 35, 200, 20);
 		userFirstName.setBounds(100, 60, 100, 20);
 		userLastName.setBounds(310, 60, 100, 20);
-		longtitude.setBounds(100, 110, 100, 20);
-		latitude.setBounds(310, 110, 100, 20);
+		longtitude.setBounds(310, 110, 100, 20);
+		latitude.setBounds(100, 110, 100, 20);
 		heartRate.setBounds(100, 135, 100, 20);
 		IP.setBounds(120, 185, 300, 20);
 		port.setBounds(120, 210, 100, 20);
